@@ -125,16 +125,16 @@ function create ()
 
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
-    this.physics.add.collider(player2, platforms);
+    //this.physics.add.collider(player2, platforms);
     this.physics.add.collider(stars, platforms);
     this.physics.add.collider(bombs, platforms);
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     this.physics.add.overlap(player, stars, collectStar, null, this);
-    this.physics.add.overlap(player2, stars, collectStar, null, this);
+    //this.physics.add.overlap(player2, stars, collectStar, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
-    this.physics.add.collider(player2, bombs, hitBomb, null, this);
+    //this.physics.add.collider(player2, bombs, hitBomb, null, this);
 }
 
 function update ()
@@ -144,7 +144,7 @@ function update ()
         return;
     }
 
-    if (event.key == "A")
+    /*if (event.key == "A")
     {
         player2.setVelocityX(-160);
 
@@ -161,7 +161,7 @@ function update ()
         player2.setVelocityX(0);
 
         player2.anims.play('turn');
-    }
+    }*/
 
     if (cursors.left.isDown)
     {
@@ -187,10 +187,10 @@ function update ()
         player.setVelocityY(-330);
     }
 
-    if (event.key == "W" && player2.body.touching.down)
+    /*if (event.key == "W" && player2.body.touching.down)
     {
         player2.setVelocityY(-330);
-    }
+    }*/
 }
 
 function collectStar (player, star)
