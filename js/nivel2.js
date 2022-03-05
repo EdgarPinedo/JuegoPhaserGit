@@ -35,7 +35,7 @@ export class nivel2 extends Phaser.Scene
         this.load.image('bomb', 'assetes/bomb.png');
         this.load.spritesheet('dude', 'assetes/dude.png', { frameWidth: 32, frameHeight: 48 });
         this.load.spritesheet('dude2', 'assetes/dude2.png', { frameWidth: 32, frameHeight: 48 });
-        this.load.image('background', 'assetes/background.png'); 
+        this.load.image('background', 'assetes/Background.png'); 
         this.load.image('lamp', 'assetes/lamp.png');
     }
 
