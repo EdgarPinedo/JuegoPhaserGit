@@ -12,8 +12,6 @@ let game = new Phaser.Game({
         arcade: {
             gravity: { y: 300 },
             debug: false,
-            //width: 3000,
-            //height: 603,
         }
     },
     scene: [nivel1, nivel2, nivel3]

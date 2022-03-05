@@ -17,8 +17,10 @@ export class nivel2 extends Phaser.Scene
     gameOver = false;
     scoreText;
     nivel;
-    spawnbombs = 8;
-    spawnStars = 24;
+    posicion = 100;
+    posicion2 = 210; 
+    spawnbombs = 13;
+    spawnStars = 43;
     posX = 12; 
     posX2 = 35;
     final;
@@ -40,54 +42,32 @@ export class nivel2 extends Phaser.Scene
     create ()
     {
         this.physics.world.checkCollision.down = true;
-        
         this.pantallaMovil = this.add.zone(603, 3000, 3000, 603);
         this.physics.world.enable(this.pantallaMovil, Phaser.Physics.Arcade.STATIC_BODY);
 
-        //  A simple background for our game
-
-        //this.scene.restart();
+        //Fondo
         this.add.image(455, 304, 'background');
         this.add.image(880, 304, 'background');
         this.add.image(1700, 304, 'background');
         this.add.image(2550, 304, 'background');
 
-        //  The platforms group contains the ground and the 2 ledges we can jump on
-        //
         this.platforms2 = this.physics.add.staticGroup();
         this.fuego = this.physics.add.staticGroup();
 
-        //  Here we create the ground.
-        //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+        //Piso de fuego
         this.fuego.create(10, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(210, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(450, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(700, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(950, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(1190, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(1400, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(1670, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(1900, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(2150, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(2380, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(2600, 595, 'fuego').setScale(1).refreshBody();
-        this.fuego.create(2840, 595, 'fuego').setScale(1).refreshBody();
+        while ( this.posicion2 < 3000 ) {
+            this.fuego.create(this.posicion2, 590, 'fuego').setScale(1).refreshBody();
+            this.posicion2 += 240;
+        }
         
-        this.platforms2.create(100, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(340, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(580, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(820, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(1060, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(1300, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(1540, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(1780, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(2020, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(2260, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(2500, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(2740, 590, 'ground2').setScale(1).refreshBody();
-        this.platforms2.create(2980, 590, 'ground2').setScale(1).refreshBody();
+        //Piso
+        while ( this.posicion < 3000 ) {
+            this.platforms2.create(this.posicion, 590, 'ground2').setScale(1).refreshBody();
+            this.posicion += 240;
+        }
 
-        //  Now let's create some ledges
+        //Piso flotante
         this.platforms2.create(600, 450, 'ground2');
         this.platforms2.create(100, 350, 'ground2');
         this.platforms2.create(750, 320, 'ground2');
@@ -105,17 +85,17 @@ export class nivel2 extends Phaser.Scene
         this.platforms2.create(2750, 250, 'ground2');
         this.platforms2.create(2950, 100, 'ground2');
 
-        // The player and its settings
+        //Jugadores
         this.player = this.physics.add.sprite(150, 450, 'dude');
         this.player2 = this.physics.add.sprite(100, 450, 'dude2');
 
-        //  Player physics properties. Give the little guy a slight bounce.
+        //Físicas del jugador
         this.player.setBounce(0.2);
         this.player.setCollideWorldBounds(true);
         this.player2.setBounce(0.2);
         this.player2.setCollideWorldBounds(true);
 
-        //  Our player1 animations, turning, walking left and walking right.
+        //Caminar izquierda, derecha - Jugador 1
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
@@ -137,7 +117,7 @@ export class nivel2 extends Phaser.Scene
         });
 
 
-        //  Our player2 animations, turning, walking left and walking right.
+        //Caminar izquierda, derecha - Jugador 2
         this.anims.create({
             key: 'left2',
             frames: this.anims.generateFrameNumbers('dude2', { start: 0, end: 3 }),
@@ -186,15 +166,16 @@ export class nivel2 extends Phaser.Scene
         });
 
         //  The score
-        this.scoreText = this.add.text(16, 16, 'Score P1: ' + this.score, { fontSize: '32px', fill: '#fff' });
-        this.scoreText2 = this.add.text(1650, 16, 'Score P2: ' + this.score2, { fontSize: '32px', fill: '#fff' });
-        this.nivel = this.add.text(900, 16, 'Nivel 2', { fontSize: '32px', fill: '#fff' });
+        this.scoreText = this.add.text(1300, 16, 'Score P1: ' + this.score, { fontSize: '32px', fill: '#fff' });
+        this.scoreText2 = this.add.text(1600, 16, 'Score P2: ' + this.score2, { fontSize: '32px', fill: '#fff' });
+        this.nivel = this.add.text(1100, 16, 'Nivel 2', { fontSize: '32px', fill: '#fff' });
 
         //  Collide the player and the stars with the platforms
         this.physics.add.collider(this.player, this.platforms2);
         this.physics.add.collider(this.player2, this.platforms2);
         this.physics.add.collider(this.stars, this.platforms2);
         this.physics.add.collider(this.bombs, this.platforms2);
+        this.physics.add.collider(this.bombs, this.fuego);
         this.physics.add.collider(this.final, this.platforms2);
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
