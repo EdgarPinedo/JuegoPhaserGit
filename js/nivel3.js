@@ -20,7 +20,7 @@ export class nivel3 extends Phaser.Scene
     spawnbombs = 8;
     spawnStars = 24;
     posX = 12; 
-    posX2 = 30;
+    posX2 = 35;
     final;
     overlaping1 = false;
     overlaping2 = false;

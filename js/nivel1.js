@@ -20,7 +20,7 @@ export class nivel1 extends Phaser.Scene
     spawnbombs = 8;
     spawnStars = 35;
     posX = 12; 
-    posX2 = 30;
+    posX2 = 35;
     final;
     overlaping1 = false;
     overlaping2 = false;
@@ -206,7 +206,7 @@ export class nivel1 extends Phaser.Scene
             this.scene.start("nivel2");
         }
 
-        /*if (this.spawnbombs > 0)
+        if (this.spawnbombs > 0)
         {
             var y = Phaser.Math.Between(0, 350);
             var bomb = this.bombs.create(this.posX2, y, 'bomb');
@@ -216,7 +216,7 @@ export class nivel1 extends Phaser.Scene
                 bomb.allowGravity = false;
                 this.posX2+=200
             this.spawnbombs--;
-        }*/
+        }
 
         if (this.spawnStars > 0)
         {
